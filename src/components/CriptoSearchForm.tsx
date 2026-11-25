@@ -7,6 +7,8 @@ import ErrorMenssage from "./ErrorMenssage";
 export default function CriptoSearchForm() {
   const cryptoCurrencies = useCriptoStore((state) => state.cryptoCurrencies);
   const fetchData = useCriptoStore((state) => state.fetchData);
+  const apiError = useCriptoStore((state) => state.apiError);
+  const loading = useCriptoStore((state) => state.loading);
   const [pair, setPair] = useState<Pair>({
     currency: "",
     criptoCurrency: "",
@@ -33,7 +35,7 @@ export default function CriptoSearchForm() {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      {error && <ErrorMenssage>{error} </ErrorMenssage>}
+      {(error || apiError) && <ErrorMenssage>{error || apiError}</ErrorMenssage>}
       <div className="field">
         <label htmlFor="currency">Moneda:</label>
         <select
@@ -60,13 +62,13 @@ export default function CriptoSearchForm() {
         >
           <option value="">-- Seleccione --</option>
           {cryptoCurrencies.map((crypto) => (
-            <option key={crypto.CoinInfo.Name} value={crypto.CoinInfo.Name}>
-              {crypto.CoinInfo.FullName}
+            <option key={crypto.id} value={crypto.id}>
+              {crypto.name} ({crypto.symbol.toUpperCase()})
             </option>
           ))}
         </select>
       </div>
-      <input type="submit" value="cotizar" />
+      <input type="submit" value={loading ? "cotizando..." : "cotizar"} disabled={loading} />
     </form>
   );
 }

@@ -13,7 +13,7 @@ function App() {
     <>
       <div className="container">
         <h1 className="app-title">
-          Contizador de <span>Cripto Monedas </span>
+          Cotizador de <span>Cripto Monedas </span>
         </h1>
         <div className="content">
           <CriptoSearchForm />

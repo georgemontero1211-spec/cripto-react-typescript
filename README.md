@@ -1,6 +1,6 @@
 # Cotizador de Criptomonedas
 
-Aplicación web que muestra la cotización actual de una criptomoneda en la moneda que elija el usuario. Usa la API pública de [CryptoCompare](https://min-api.cryptocompare.com/).
+Aplicación web que muestra la cotización actual de una criptomoneda en la moneda que elija el usuario. Usa la API pública de [CoinGecko](https://www.coingecko.com/en/api), que no requiere API key.
 
 ## Funcionalidades
 
@@ -12,6 +12,7 @@ Aplicación web que muestra la cotización actual de una criptomoneda en la mone
   - Variación en las últimas 24 horas
   - Última actualización
 - Validación de las respuestas de la API con Zod.
+- Aviso al usuario cuando la API alcanza su límite de consultas (HTTP 429).
 - Estado global con Zustand.
 
 ## Tecnologías
@@ -28,7 +29,7 @@ src/
 ├── components/   # CriptoSearchForm, CryptoPriceDisplay, ErrorMessage
 ├── data/         # Monedas disponibles
 ├── schemas/      # Esquemas Zod de las respuestas
-├── services/     # Peticiones a CryptoCompare
+├── services/     # Peticiones a CoinGecko
 ├── store.ts      # Store de Zustand
 └── types/
 ```
@@ -40,7 +41,7 @@ npm install
 npm run dev
 ```
 
-No necesita variables de entorno.
+No necesita variables de entorno ni API key. El plan gratuito de CoinGecko limita la cantidad de consultas por minuto; si se supera, la app muestra un aviso.
 
 | Script            | Descripción                       |
 | ----------------- | --------------------------------- |
